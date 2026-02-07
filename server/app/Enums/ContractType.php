@@ -8,6 +8,7 @@ enum ContractType: string
     case CDD = 'CDD';
     case STAGE = 'Stage';
     case FREELANCE = 'Freelance';
+    case ANAPEC = 'Anapec';
 
     public function label(): string
     {

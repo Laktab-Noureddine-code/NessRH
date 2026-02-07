@@ -92,4 +92,26 @@ class Employee extends Model
     public function company(){
         return $this->belongsTo(Company::class ,'company_id');
     }
+
+    public function department(){
+        return $this->belongsTo(Department::class ,'department_id');
+    }
+
+    // employee belongs to manager
+    public function manager(){
+        return $this->belongsTo(Employee::class, 'manager_id');
+    }
+
+    // manager has many subordinates (employee)
+    public function subordinates(){
+        return $this->hasMany(Employee::class, 'manager_id');
+    }
+
+    public function jobPosition(){
+        return $this->belongsTo(JobPosition::class, 'job_position_id');
+    }
+
+    public function contracts(){
+        return $this->hasMany(Contract::class);
+    }
 }

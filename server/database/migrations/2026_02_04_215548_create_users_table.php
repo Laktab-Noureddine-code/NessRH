@@ -17,9 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['super', 'admin', 'employee'])->default('employee');
-            $table->foreignId('employee_id')->nullable()->constrained('employees');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->enum('role', ['admin', 'hr', 'employee', 'manager'])->default('employee');
             $table->boolean('is_active')->default(true);
             $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();

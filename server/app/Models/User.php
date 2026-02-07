@@ -17,17 +17,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    const ROLE_SUPER = 'super';
-    const ROLE_ADMIN = 'admin';
-    const ROLE_EMPLOYEE = 'employee';
 
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
-        'employee_id',
-        'company_id',
         'is_active',
         'last_login_at',
     ];
@@ -48,10 +43,7 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-    public function hasRole($role): bool
-    {
-        return $this->role === $role;
-    }
+   
 
     protected function casts(): array
     {
