@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('company_id')->constrained('companies');
-            $table->string('name')->unique();
-            $table->string('code')->unique();
+        Schema::table('departments', function (Blueprint $table) {
             $table->foreignId('manager_id')->constrained('employees');
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::table('departments', function (Blueprint $table) {
+            //
+        });
     }
 };
