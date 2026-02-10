@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { Eye, EyeOff } from "lucide-react";
-import api from "../../api/axios";
+import api, { getCsrfCookie } from "../../api/axios";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../../redux/slices/authSlice";
 
@@ -19,6 +19,7 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
+      await getCsrfCookie();
       const data = await api.post("/api/login", { email, password });
       if (data.status === 200) {
         setLoading(false);

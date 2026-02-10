@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
-import api from "../../api/axios";
+import api, { getCsrfCookie } from "../../api/axios";
 
 function Register() {
   const [name, setName] = useState<string>("");
@@ -25,6 +25,7 @@ function Register() {
 
     try {
       setLoading(true);
+      await getCsrfCookie();
       const data = await api.post("/api/register", { name, email, password });
       if (data.status === 201) {
         setLoading(false);

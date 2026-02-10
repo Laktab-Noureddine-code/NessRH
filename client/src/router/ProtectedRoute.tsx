@@ -10,6 +10,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user, company, loading } = useAuth();
+  console.log("ProtectedRoute: user =", user, "company =", company, "loading =", loading);
   const dispatch = useDispatch();
 
   if (loading) return <div>loading...</div>;

@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Navbar from "../../components/shared/Navbar";
-import CompanyForms from "./CompanyForms";
+import Navbar from "../../../components/shared/Navbar";
+import CompanyForms from "../components/CompanyForms";
+import { validateStep, type CompanyErrors } from "../schemas/companySchema";
+import api from "@/api/axios";
 
 const companySizes = ["1-10", "11-50", "51-100", "101-200", "201-500", "500+"];
-const statusOptions = ["active", "inactive", "pending"];
+const statusOptions = ["active", "inactive"];
 
 function CreateCompany() {
   const { t } = useTranslation();
-  const [companyName, setCompanyName] = useState("");
-  const [domainName, setDomainName] = useState("");
-  const [companySize, setCompanySize] = useState("1-10");
-  const [ice, setIce] = useState("");
-  const [cnssEmployerNumber, setCnssEmployerNumber] = useState("");
-  const [companyNumber, setCompanyNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
-  const [status, setStatus] = useState("active");
+  
+  const [companyData, setCompanyData] = useState({
+    company_name: "",
+    ice: "",
+    cnss_employer_number: "",
+    company_size: "1-10",
+    address: "",
+    city: "",
+    phone: "",
+    email: "",
+    logo_url: "",
+    status: "active",
+  });
+
+  const updateField = (field: string, value: string) => {
+    setCompanyData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+  const [errors, setErrors] = useState<CompanyErrors>({});
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 4;
 
@@ -27,11 +36,19 @@ function CreateCompany() {
     if (currentStep > 1) setCurrentStep((s) => s - 1);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+    const stepErrors = validateStep(currentStep, companyData);
+    if (Object.keys(stepErrors).length > 0) {
+      setErrors(stepErrors);
+      return;
+    }
+    setErrors({});
+
     if (currentStep < totalSteps) {
       setCurrentStep((s) => s + 1);
     } else {
-      // TODO: submit
+      console.log('Submitting company data:', companyData);
+      await api.post("/api/companies", companyData);
     }
   };
 
@@ -100,31 +117,10 @@ function CreateCompany() {
           {/* Right Side - Form */}
           <CompanyForms
             step={currentStep}
-            companyName={companyName}
-            setCompanyName={setCompanyName}
-            domainName={domainName}
-            setDomainName={setDomainName}
-            companySize={companySize}
-            setCompanySize={setCompanySize}
+            data={companyData}
+            errors={errors}
+            updateField={updateField}
             companySizes={companySizes}
-            ice={ice}
-            setIce={setIce}
-            cnssEmployerNumber={cnssEmployerNumber}
-            setCnssEmployerNumber={setCnssEmployerNumber}
-            companyNumber={companyNumber}
-            setCompanyNumber={setCompanyNumber}
-            address={address}
-            setAddress={setAddress}
-            city={city}
-            setCity={setCity}
-            phone={phone}
-            setPhone={setPhone}
-            email={email}
-            setEmail={setEmail}
-            logoUrl={logoUrl}
-            setLogoUrl={setLogoUrl}
-            status={status}
-            setStatus={setStatus}
             statusOptions={statusOptions}
           />
         </div>

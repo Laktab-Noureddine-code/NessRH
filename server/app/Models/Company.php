@@ -9,6 +9,7 @@ class Company extends Model
     protected $fillable = [
         'company_name',
         'ice',
+        'company_size',
         'cnss_employer_number',
         'address',
         'city',
@@ -20,11 +21,11 @@ class Company extends Model
 
     public function employees()
     {
-        return $this->hasMany(Employee::class ,'company_id');
+        return $this->hasMany(Employee::class, 'company_id');
     }
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'company_id');
     }
 }

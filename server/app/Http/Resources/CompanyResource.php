@@ -17,6 +17,7 @@ class CompanyResource extends JsonResource
         return [
             'company_name' => $this->company_name,
             'ice' => $this->ice,
+            'company_size'=> $this->company_size,
             'cnss_employer_number' => $this->cnss_employer_number,
             'address' => $this->address,
             'city' => $this->city,

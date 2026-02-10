@@ -1,6 +1,12 @@
 {
   "welcome": "Bienvenue!",
   "login": "Connexion",
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "email": "Veuillez entrer une adresse email valide",
+    "numeric": "Ce champ doit être un nombre",
+    "maxLength": "Ne doit pas dépasser {{max}} caractères"
+  },
   "company": {
     "stepOf": "Étape {{current}} sur {{total}}",
     "goBack": "Retour",

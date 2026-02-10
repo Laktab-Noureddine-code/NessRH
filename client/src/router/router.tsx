@@ -3,7 +3,7 @@ import Login from "../features/auth/Login";
 import { AuthenticatedRoute, GuestRoute, ProtectedRoute } from "./ProtectedRoute";
 import App from "../App";
 import Register from "../features/auth/Register";
-import CreateCompany from "../features/company/CreateCompany";
+import CreateCompany from "../features/company/pages/CreateCompany";
 
 export const router = createBrowserRouter([
   {

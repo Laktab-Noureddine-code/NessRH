@@ -1,6 +1,12 @@
 {
   "welcome": "Welcome!",
   "login": "Login",
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "numeric": "This field must be a number",
+    "maxLength": "Must not exceed {{max}} characters"
+  },
   "company": {
     "stepOf": "Step {{current}} of {{total}}",
     "goBack": "Go Back",

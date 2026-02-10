@@ -6,6 +6,9 @@ use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
+use Faker\Provider\Person;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class CompanyController extends Controller
 {
@@ -30,7 +33,11 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        $company = Company::create($request->validated());
+        $user = $request->user();
+        $company = Company::create(array_merge($request->validated(), ['user_id' => $user->id]));
+
+        $user->update(['company_id' => $company->id]);
+
         return response()->json(['company' => new CompanyResource($company)], 201);
     }
 
