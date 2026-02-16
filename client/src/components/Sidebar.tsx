@@ -42,8 +42,16 @@ const dashboardRoutes: Route[] = [
     title: "Employees",
     icon: <Users className="size-4 text-app" />,
     link: "/dashboard/manage-employees",
+    subs: [{ title: "Manage Employees", link: "/dashboard/manage-employees" }],
+  },
+  {
+    id: "Departments",
+    title: "Departments",
+    icon: <ClipboardList className="size-4 text-app" />,
+    link: "/dashboard/departments",
     subs: [
-      { title: "Manage Employees", link: "/dashboard/manage-employees" },
+      { title: "Manage Departments", link: "/dashboard/departments/manage" },
+      { title: "Add Department", link: "/dashboard/departments/add" },
     ],
   },
   {
@@ -128,7 +136,8 @@ function NavItem({ route }: { route: Route }) {
   const [open, setOpen] = useState(false);
   const hasSubRoutes = !!route.subs?.length;
   const isDashboard = route.id === "dashboard";
-  const isActive = location.pathname === route.link ||
+  const isActive =
+    location.pathname === route.link ||
     route.subs?.some((s) => location.pathname === s.link);
 
   if (isDashboard) {
@@ -154,7 +163,7 @@ function NavItem({ route }: { route: Route }) {
             "flex w-full items-center rounded-lg px-2 py-2 transition-colors",
             isActive
               ? "bg-accent text-foreground"
-              : "text-muted-foreground hover:bg-accent hover:text-foreground"
+              : "text-muted-foreground hover:bg-accent hover:text-foreground",
           )}
         >
           {route.icon}
@@ -177,7 +186,7 @@ function NavItem({ route }: { route: Route }) {
                     "flex items-center rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
                     location.pathname === sub.link
                       ? "bg-accent text-foreground"
-                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground",
                   )}
                 >
                   {sub.title}
@@ -198,7 +207,7 @@ function NavItem({ route }: { route: Route }) {
           "flex items-center rounded-lg px-2 py-2 transition-colors",
           isActive
             ? "bg-accent text-foreground"
-            : "text-muted-foreground hover:bg-accent hover:text-foreground"
+            : "text-muted-foreground hover:bg-accent hover:text-foreground",
         )}
       >
         {route.icon}

@@ -38,9 +38,7 @@ export default function DataTable<T>({
   isLoading = false,
 }: DataTableProps<T>) {
 
- 
 
- 
 
   return (
     <div className="w-full overflow-x-auto">

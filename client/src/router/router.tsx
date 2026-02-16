@@ -10,6 +10,7 @@ import Dashboard from "../features/dashboard/Dashboard";
 import CreateCompany from "../features/company/pages/CreateCompany";
 import ManageEmployees from "@/features/employees/pages/ManageEmployees";
 import AddEmployee from "@/features/employees/pages/AddEmployee";
+import Departments from "@/features/departments/pages/Departments";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "manage-employees", element: <ManageEmployees /> },
       { path: "add-employee", element: <AddEmployee /> },
+      { path: "departments", element: <Departments /> },
     ],
   },
 ]);

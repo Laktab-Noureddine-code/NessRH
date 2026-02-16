@@ -10,7 +10,7 @@ export default function Dashboard() {
         <DashboardNavbar />
         {/* Page content */}
         <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
-          <div className="bg-white rounded-lg shadow-sm p-4 h-full ">
+          <div className="bg-white rounded-lg shadow-sm p-4 min-h-full ">
             <Outlet />
           </div>
         </div>
